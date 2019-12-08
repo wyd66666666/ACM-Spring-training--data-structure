@@ -5,3 +5,5 @@ data structure
 山东理工acm
 
 u盘上的一部分代码进行备份，剩余代码在acm平台上
+
+大一下学期acm集训留念
