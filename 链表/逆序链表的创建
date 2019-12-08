@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct student
+{
+    int num;
+    struct student *next;
+};
+
+struct student *m(int n)
+{
+    int i;
+ struct student *head,*ne;
+   head=(struct student *)malloc(sizeof(struct student));
+    head->next=NULL;
+    for(i=0;i<n;i++)
+    {
+        ne=(struct student *)malloc(sizeof(struct student));
+        scanf("%d",&ne->num);
+        ne->next=head->next;
+        head->next=ne;
+    }
+  return head;
+}
+
+pr(struct student *head)
+{
+   struct student *t;
+   t=head->next;
+   while(t!=NULL)
+   {
+       if(t->next==NULL)
+       {
+           printf("%d\n",t->num);
+       }
+       else
+       {
+           printf("%d ",t->num);
+       }
+       t=t->next;
+   }
+}
+
+int main()
+{
+    struct student *head;
+    int n;
+    scanf("%d",&n);
+    head=m(n);
+    pr(head);
+    return 0;
+}
