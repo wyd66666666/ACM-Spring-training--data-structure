@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+void erfen(int shu,int a[],long int m,long int r)
+{
+ long int i=m,j=r,mid;
+ if(i>j)
+ {
+     printf("No Found!\n");
+     return;
+ }
+ else
+ {
+     mid=(i+j)/2;
+     if(a[mid]==shu)
+     {
+         printf("%ld\n",mid+1);
+         return;
+     }
+     if(a[mid]>shu)
+     {
+
+        return erfen(shu,a,m,mid-1);
+     }
+     else if(a[mid]<shu)
+     {
+
+        return erfen(shu,a,mid+1,r);
+     }
+ }
+}
+
+int main()
+{
+    int a[100001],shu;
+    long int n,i,m;
+    scanf("%ld",&n);
+    for(i=0; i<n; i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    scanf("%ld",&m);
+    while(m--)
+    {
+        scanf("%d",&shu);
+        erfen(shu,a,0,n);
+    }
+    return 0;
+}
