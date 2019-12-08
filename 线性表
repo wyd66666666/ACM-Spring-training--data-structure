@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct st
+{
+    int a[100];
+    int lon;
+};
+struct st *p(struct st *h)
+{
+    int i;
+    for(i=0;i<lon;i++)
+    {
+        scanf("%d",&h->a[i]);
+    }
+}
+
+
+int main()
+{
+    struct st h;
+    scanf("%d",&h->lon);
+    p(&h);
+    pr(&h);
+    return 0;
+}
