@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+typedef struct st
+{
+    struct st *l,*r;
+    char num;
+} st;
+
+st *build(int d,char qian[50],char zhong[50])
+{
+    st *p;
+    int i;
+    if(d<=0)
+    {
+        return NULL;
+    }
+    p=(st *)malloc(sizeof(st));
+    p->num=qian[0];
+    for(i=0; i<d; i++)
+    {
+        if(qian[0]==zhong[i])
+        {
+            break;
+        }
+    }
+    p->l=build(i,qian+1,zhong);
+    p->r=build(d-i-1,qian+i+1,zhong+i+1);
+    return p;
+}
+
+int high(st *p)
+{
+    int n,m;
+    if(p==NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        n=high(p->l);
+        m=high(p->r);
+        if(m>n)
+        {
+            return m+1;
+
+        }
+        else
+            return n+1;
+    }
+}
+
+void fe(st *p)
+{
+    if(p)
+    {
+        fe(p->l);
+        fe(p->r);
+        free(p);
+    }
+}
+
+int main()
+{
+    char qian[50],zhong[50];
+    int d,c;
+    st *p;
+    while(scanf("%d",&d)!=EOF)
+    {
+        scanf("%s %s",qian,zhong);
+        //d=strlen(zhong);
+        p=build(d,qian,zhong);
+        c=high(p);
+        printf("%d\n",c);
+        fe(p);
+    }
+    return 0;
+}
