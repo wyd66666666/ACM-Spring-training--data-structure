@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+char hou[50],zhong[50];
+
+typedef struct st
+{
+    struct st *l,*r;
+    char num;
+}st;
+
+st *build(int d,char zhong[50],char hou[50])
+{
+    int i;
+    st *p;
+    if(d<=0)
+    {
+        return NULL;
+    }
+    else
+    {
+        p=(st *)malloc(sizeof(st));
+        p->num=hou[d-1];
+        for(i=0;i<d;i++)
+        {
+            if(hou[d-1]==zhong[i])
+                break;
+        }
+        p->l=build(i,zhong,hou);
+        p->r=build(d-i-1,zhong+i+1,hou+i);
+        return p;
+    }
+}
+
+void pr(st *p)
+{
+    if(p)
+    {
+        printf("%c",p->num);
+        pr(p->l);
+        pr(p->r);
+    }
+}
+
+void fr(st *p)
+{
+    if(p)
+    {
+
+        fr(p->l);
+        fr(p->r);
+        free(p);
+    }
+}
+
+int main()
+{
+    int d,n;
+    st *p;
+    scanf("%d",&n);
+    while(n--)
+    {scanf("%s %s",zhong,hou);
+    d=strlen(zhong);
+    p=build(d,zhong,hou);
+    pr(p);
+    printf("\n");
+    fr(p);
+    }
+    return 0;
+}
