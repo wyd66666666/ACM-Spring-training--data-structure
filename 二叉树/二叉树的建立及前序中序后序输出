@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    char num;
+    struct node *lchild,*rchild;
+}node;
+
+node *build()
+{
+    node *p;
+    char a;
+    scanf("%c",&a);
+    if(a==',')
+    {
+        p=NULL;
+    }
+    else
+    {
+        p=(node *)malloc(sizeof(node));
+        p->num=a;
+        p->lchild=build();
+        p->rchild=build();
+    }
+
+     return p;
+
+}
+
+void qian(node *p)
+{
+
+    if(p!=NULL)
+    {
+        printf("%c",p->num);
+         qian(p->lchild);
+         qian(p->rchild);
+    }
+}
+
+void zhong(node *p)
+{
+    if(p)
+    {
+        zhong(p->lchild);
+        printf("%c",p->num);
+        zhong(p->rchild);
+    }
+}
+
+void hou(node *p)
+{
+    if(p)
+    {
+        hou(p->lchild);
+        hou(p->rchild);
+        printf("%c",p->num);
+    }
+}
+
+int main()
+{
+    node *p;
+   p=build();
+    qian(p);
+    printf("\n");
+    zhong(p);
+    printf("\n");
+    hou(p);
+    return 0;
+}
