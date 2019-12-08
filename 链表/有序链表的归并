@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct st
+{
+    int num;
+    struct st *next;
+};
+
+
+
+int main()
+{
+    int n,m;
+    int i;
+    struct st *p,*q;
+    struct st *head1,*head2;
+    struct st *ne1,*ne2,*end1,*h1,*h2,*end2,*end3,*t;
+    scanf("%d %d",&n,&m);
+    h1=(struct st*)malloc(sizeof(struct st));
+    h2=(struct st*)malloc(sizeof(struct st));
+    end1=h1;
+    end2=h2;
+    h1->next=NULL;
+    h2->next=NULL;
+    for(i=0; i<n; i++)
+    {
+        h1=(struct st*)malloc(sizeof(struct st));
+        scanf("%d",&ne1->num);
+        end1->next=ne1;
+        ne1->next=NULL;
+        end1=ne1;
+    }
+    for(i=0; i<m; i++)
+    {
+        h1=(struct st*)malloc(sizeof(struct st));
+        scanf("%d",&ne2->num);
+        end2->next=ne2;
+        ne2->next=NULL;
+        end2=ne2;
+    }
+    head1=ne1;
+    head2=ne2;
+
+    end3=p=head1->next;
+    q=head2->next;
+    head1->next=NULL;
+    head2->next=NULL;
+    free(head2);
+    while(p!=NULL||q!=NULL)
+    {
+        if(p->num<q->num)
+        {
+
+            end3->next=p;
+            p->next=NULL;
+            p=p->next;
+            end3=p;
+        }
+        else
+        {
+            end3->next=q;
+            q->next=NULL;
+            q=q->next;
+            end3=q;
+
+        }
+        if(p==NULL)
+        {
+            p->next=q;
+            q->next=q;
+        }
+        else
+        {
+            q->next=p;
+            p->next=p;
+        }
+    }
+
+    t=head1;
+    while(t!=NULL)
+    {
+        printf("%d ",t->num);
+        t=t->next;
+    }
+    return 0;
+}
