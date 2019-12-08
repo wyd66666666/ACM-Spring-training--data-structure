@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct st
+{
+    int num;
+    struct st *next;
+};
+struct st *p(int n)
+{
+    int i;
+    struct st *head,*ne;
+    head=(struct st *)malloc(sizeof(struct st));
+    head->next=NULL;
+    for(i=0; i<n; i++)
+    {
+        ne=(struct st *)malloc(sizeof(struct st));
+        scanf("%d",&ne->num);
+
+        ne->next=head->next;
+        head->next=ne;
+        if(ne->num==4)
+        {
+            head->next=ne->next;
+            free(ne);
+        }
+    }
+    return head;
+}
+
+void m(struct st *head)
+{
+    struct st *t;
+    t=head->next;
+    while(t!=NULL)
+    {
+        printf("%d ",t->num);
+        t=t->next;
+    }
+
+}
+void change(struct st *hea)
+{
+    struct st *p,*q;
+    p=hea->next;
+     hea->next=NULL;
+    q=p->next;
+
+    while(p!=NULL)
+    {
+        p->next=hea->next;
+
+        hea->next=p;
+
+
+        p=q;
+        if(q!=NULL)
+        {
+            q=q->next;
+        }
+
+    }
+
+
+}
+
+int main()
+{
+    int n;
+    struct st *head;
+    scanf("%d",&n);
+    head=p(n);
+    m(head);
+    change(head);
+    m(head);
+    return 0;
+}
