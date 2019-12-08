@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct st
+{
+    long int num;
+    struct st *next;
+} st;
+
+st *p(int n)
+{
+    int i,b,d;
+    int m;
+    st *head,*end,*ne,*t,*q,*w,*c;
+    head=(st *)malloc(sizeof(st));
+    head->next=NULL;
+    end=head;
+    for(i=0; i<n; i++)
+    {
+        ne=(st *)malloc(sizeof(st));
+        scanf("%ld",&ne->num);
+        ne->next=NULL;
+        end->next=ne;
+        end=ne;
+    }
+
+    scanf("%d",&m);
+    for(i=0; i<m; i++)
+    {
+        scanf("%d",&b);
+        if(b==1)
+        {
+            d=0;
+            ne=(st *)malloc(sizeof(st));
+            scanf("%ld",&ne->num);
+            ne->next=NULL;
+            q=head->next;
+            w=q->next;
+            if(q->num>ne->num)
+            {
+                ne->next=head->next;
+                head->next=ne;
+                d=1;
+            }
+            if(d==0)
+            {
+
+                while(w->next!=NULL)
+                {
+                    if(w->num>=ne->num)
+                    {
+                        ne->next=q->next;
+                        q->next=ne;
+                        break;
+                    }
+                    q=w;
+                     w=w->next;
+
+
+                }
+
+                if(w->next==NULL&&w->num<=ne->num)
+                {
+                    w->next=ne;
+                }
+               else if(w->next==NULL&&w->num>ne->num)
+                {
+                    ne->next=q->next;
+                        q->next=ne;
+                }
+
+            }
+
+        }
+        else if(b==2)
+        {
+            t=head->next;
+            while(t->next!=NULL)
+            {
+                printf("%ld ",t->num);
+                t=t->next;
+            }
+            printf("%ld\n",t->num);
+
+        }
+    }
+
+    t=head->next;
+    while(t->next!=NULL)
+    {
+        c=t;
+        t=t->next;
+        free(c);
+    }
+    free(t);
+    /*t=head->next;
+    while(t->next!=NULL)
+    {
+        printf("%d ",t->num);
+        t=t->next;
+    }
+    printf("%d\n",t->num);*/
+    return 0;
+}
+
+int main()
+{
+    long int n;
+    st *head;
+    while(scanf("%ld",&n)!=EOF)
+    {
+        head=p(n);
+    }
+    return 0;
+}
