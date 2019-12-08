@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct st
+{
+    int num;
+    struct st *next;
+}st;
+
+st *build(int n)
+{
+    st *head,*end,*ne,*t;
+    int m;
+    head=(st *)malloc(sizeof(st));
+    head->next=NULL;
+    end=head;
+    scanf("%d",&m);
+    while(n--)
+    {
+        ne=(st *)malloc(sizeof(st));
+        scanf("%d",&ne->num);
+        ne->next=NULL;
+        end->next=ne;
+        end=ne;
+    }
+
+    t=head;
+    while(m--)
+    {
+        t=t->next;
+    }
+    end->next=head->next;
+    head->next=t->next;
+    t->next=NULL;
+
+    t=head->next;
+    while(t->next!=NULL)
+    {
+        printf("%d ",t->num);
+        t=t->next;
+    }
+    printf("%d\n",t->num);
+
+    t=head->next;
+    while(t!=NULL)
+    {
+        ne=t;
+        t=t->next;
+        free(ne);
+    }
+    free(head);
+    return;
+}
+
+int main()
+{
+   int n,m;
+   scanf("%d",&m);
+   while(m--)
+   {
+       scanf("%d",&n);
+       build(n);
+   }
+    return 0;
+}
