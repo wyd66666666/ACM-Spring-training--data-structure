@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    int **p;
+    int i,j;
+    int b,c;
+    scanf("%d %d",&b,&c);
+    p=(int **)malloc(b*sizeof(int*));   //为二维数组分配b行
+    for(i=0; i<b; i++)
+    {
+        p[i]=(int *)malloc(c*sizeof(int));  //为每列分配c个大小空间
+
+    }
+     for(i=0; i<b; i++)
+    {
+        for(j=0; j<c; j++)
+        {
+            scanf("%d",&p[i][j]);
+        }
+
+    }
+    for(i=0; i<b; i++)
+    {
+        for(j=0; j<c; j++)
+        {
+            printf("%5d",p[i][j]);
+        }
+        printf("\n");
+    }
+    for(i=0; i<b; i++)
+    {
+        free(p[i]);
+    }
+    free(p);
+    return 0;
+
+}
