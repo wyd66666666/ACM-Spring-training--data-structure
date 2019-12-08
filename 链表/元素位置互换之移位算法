@@ -32,6 +32,7 @@ st *build(int n)
     head->next=t->next;
     t->next=NULL;
 
+
     t=head->next;
     while(t->next!=NULL)
     {
