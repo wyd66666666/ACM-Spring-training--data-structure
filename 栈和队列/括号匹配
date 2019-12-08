@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+
+typedef struct st
+{
+    struct st *next;
+    char c;
+} st;
+
+void chu(char *a,int n)
+{
+    int i,s=0,b=0;
+    st *head,*ne,*t,*m;
+    head=(st *)malloc(sizeof(st));
+    head->next=NULL;
+    for(i=0; i<n; i++)
+    {
+        if(a[i]=='('||a[i]=='['||a[i]=='{')
+        {
+            ne=(st *)malloc(sizeof(st));
+            s++;
+            ne->c=a[i];
+            ne->next=head->next;
+            head->next=ne;
+            b++;
+        }
+        else if((a[i]==')')||(a[i]==']')||(a[i]=='}'))
+        {
+            t=head->next;
+            b++;
+            if(head->next==NULL)
+            {
+                printf("no\n");
+                return;
+            }
+            if((a[i]==')'&&t->c=='(')||(a[i]==']'&&t->c=='[')||(a[i]=='}'&&t->c=='{'))
+            {
+                head->next=t->next;
+                m=t;
+                t=t->next;
+                s--;
+                free(m);
+            }
+            else
+            {
+                printf("no\n");
+                return;
+            }
+        }
+    }
+    //if(b==0)
+    //{
+    //    printf("no\n");
+    //    return;
+   // }
+    if(s==0)
+    {printf("yes\n");}
+    else
+    {
+        printf("no\n");
+        return;
+    }
+    t=head;
+    while(t!=NULL)
+    {
+        m=t;
+        t=t->next;
+        free(m);
+    }
+    return;
+
+}
+
+int main()
+{
+    char a[50];
+    int n;
+    while(scanf("%s",a)!=EOF)
+    {
+        n=strlen(a);
+        chu(a,n);
+    }
+
+    return 0;
+}
+
