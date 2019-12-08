@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct st
+{
+    long long num;
+    struct st *next,*qian;
+} st;
+
+st *p(long long n,int s)
+{
+    st *ne,*head,*t,*end,*q;
+    int i,m,c=0;
+   head=(st *)malloc(sizeof(st));
+   end=(st *)malloc(sizeof(st));
+    head->next=end;
+    head->qian=NULL;
+    end->next=NULL;
+    end->qian=head;
+    m=n;
+    t=head->next;
+    q=end->qian;
+    if(s<=0)
+    {
+        printf("NULL\n");
+        return;
+    }
+    for(i=0; i<s; i++)
+    {
+        ne=(st *)malloc(sizeof(st));
+        ne->next=NULL;
+        ne->qian=NULL;
+        if(m%2==0)
+        {
+            ne->num=m/2;
+            m=ne->num;
+            ne->next=head->next;
+            head->next=ne;
+            ne->qian=t->qian;
+            t->qian=ne;
+            t=ne;
+        }
+
+        else
+        {
+            ne->num=3*m+1;
+            m=ne->num;
+            q->next=ne;
+            ne->next=end;
+            ne->qian=q;
+            end->qian=ne;
+
+        }
+        q=end->qian;
+    }
+    t=head->next;
+    while(t->next->next!=NULL)
+    {
+        printf("%ld ",t->num);
+        q=t;
+        t=t->next;
+        free(q);
+
+    }
+   printf("%ld\n",t->num);
+   free(t);
+    return 0;
+
+}
+
+int main()
+{
+    int m;
+    long long n;
+
+    while(scanf("%ld%d",&n,&m)!=EOF)
+    {p(n,m);
+    }
+    return 0;
+}
