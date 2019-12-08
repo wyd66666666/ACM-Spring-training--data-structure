@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void qsor(int a[],int m,int r)
+{
+    int key=a[m],i=m,j=r;
+    if(m>=r)
+    {
+        return;
+    }
+    else
+    {
+        while(i<j&&a[j]>=key)
+        {
+            j--;
+        }
+        a[i]=a[j];
+        while(i<j&&a[i]<=key)
+        {
+            i++;
+        }
+        a[j]=a[i];
+    }
+    a[i]=key;
+    qsor(a,m,i-1);
+    qsor(a,i+1,r);
+
+}
+
+int main()
+{
+    int i,n,a[100001];
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    qsor(a,0,n-1);
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",a[i]);
+    }
+    return 0;
+}
